@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const port = 8080;
+const port = 8081;
 const neo4j = require("neo4j-driver").v1;
 const driver = neo4j.driver("bolt://localhost:7687",neo4j.auth.basic("neo4j", "1234")
 );
@@ -145,5 +145,5 @@ app.post("/reco", function (req, res) {
   });
 
 app.listen(port, function () {
-  console.log("Example app listening on port " + 8080);
+  console.log("Example app listening on port " + 8081);
 });
