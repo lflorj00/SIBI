@@ -1,25 +1,46 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const port = 8081;
+const port = 8080;
 var cors = require("cors");
 const neo4j = require("neo4j-driver");
-const driver = neo4j.driver("bolt://localhost:7687", neo4j.auth.basic("neo4j", "1234"));
+const driver = neo4j.driver("bolt://localhost:11005", neo4j.auth.basic("neo4j", "1234"));
 const session = driver.session();
 app.use(cors());
 app.use(bodyParser.json);
 app.use(bodyParser.urlencoded( {extended: true} ));
 
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method"
-    );
-    res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
-    res.header("Allow", "GET, POST, OPTIONS, PUT, DELETE");
-    next();
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+  res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+  next();
+});
+
+app.post("/bscr", function (req, res) {
+  var songi = req.body.name;
+  console.log(songi);
+  var query = "MATCH (n:Song) where n.name =~ '(?i).*" + songi + ".*' return n";
+  console.log(query);
+  var array = [];
+  const resultPromise = session.run(query).subscribe({
+    onNext: function (record) {
+      array.push(record.get(0).properties);
+
+    },
+    onCompleted: function () {
+      console.log(array);
+
+      res.send(array);
+
+      session.close();
+    },
+    onError: function (error) {
+      console.log(error);
+    }
   });
+}),
 
 app.post("/reco", function (req, res) {
     var subgender = req.body.subgender;
