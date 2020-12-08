@@ -74,7 +74,6 @@
               <v-btn @click="alb" color="green" dark outlined rounded
                 >Álbumes</v-btn
               >
-              
             </v-flex>
           </v-layout>
         </v-container>
@@ -101,12 +100,10 @@
           </v-layout>
         </v-container>
 
-        <v-content v-if="this.buti2">
+        <v-main v-if="this.buti2">
           <v-container grid-list-md text-xs-center fluid pa-12>
             <v-text-field
               label="Canción"
-              v-model="search"
-              v-on:keyup.enter="buscar()"
               single-line
             ></v-text-field>
             <v-layout row wrap fill-height fill-width justify-center>
@@ -128,9 +125,9 @@
               </v-flex>
             </v-layout>
           </v-container>
-        </v-content>
+        </v-main>
 
-        <v-content v-if="this.buti6">
+        <v-main v-if="this.buti6">
           <v-container grid-list-md text-xs-center fluid pa-12>
             <v-layout row wrap fill-height fill-width justify-center>
               <v-flex v-for="(item, index) in array" v-bind:key="index">
@@ -151,9 +148,9 @@
               </v-flex>
             </v-layout>
           </v-container>
-        </v-content>
+        </v-main>
 
-        <v-content v-if="this.buti5">
+        <v-main v-if="this.buti5">
           <v-container grid-list-md text-xs-center fluid pa-12>
             <v-layout row wrap fill-height fill-width justify-center>
               <v-flex v-for="(item, index) in yarra" v-bind:key="index">
@@ -176,9 +173,9 @@
               </v-flex>
             </v-layout>
           </v-container>
-        </v-content>
+        </v-main>
 
-        <v-content v-if="this.buti3">
+        <v-main v-if="this.buti3">
           <v-container grid-list-md text-xs-center fluid pa-12>
             <v-layout row wrap fill-height fill-width justify-center>
               <v-text-field
@@ -200,9 +197,9 @@
               </v-flex>
             </v-layout>
           </v-container>
-        </v-content>
+        </v-main>
 
-        <v-content v-if="this.buti4">
+        <v-main v-if="this.buti4">
           <v-container grid-list-md text-xs-center fluid pa-12>
             <v-layout row wrap fill-height fill-width justify-center>
               <v-text-field
@@ -224,7 +221,7 @@
               </v-flex>
             </v-layout>
           </v-container>
-        </v-content>
+        </v-main>
       </v-card>
     </v-app>
   </v-main>
@@ -243,7 +240,6 @@ export default {
     buti4: false,
     buti5: false,
     buti6: false,
-    tultul: false,
     fab: false,
     search: "",
     drawer: false,
@@ -266,30 +262,7 @@ export default {
     return: {},
   }),
   methods: {
-    tulbi() {
-      this.tultul = true;
-      this.buti2 = false;
-      this.buti3 = false;
-      this.buti4 = false;
-      this.buti5 = false;
-      this.buti6 = false;
-    },
 
-    buscar() {
-      this.array = [];
-      var data = { name: this.search };
-      this.$http.post("http://localhost:8080/bscr", data).then((response) => {
-        if (response.body.length != 0) this.array = response.body;
-        else {
-          var error = [
-            {
-              name: "No se encontró ninguna coincidencia",
-            },
-          ];
-          this.array = error;
-        }
-      });
-    },
     reco() {
       this.buti2 = false;
       this.buti3 = false;
@@ -318,7 +291,6 @@ export default {
       });
     },
     can() {
-      this.tultul = false;
       this.buti2 = true;
       this.buti3 = false;
       this.buti4 = false;
@@ -330,7 +302,6 @@ export default {
       });
     },
     alb() {
-      this.tultul = false;
       this.buti2 = false;
       this.buti3 = false;
       this.buti4 = true;
@@ -342,7 +313,6 @@ export default {
       });
     },
     art() {
-      this.tultul = false;
       this.buti2 = false;
       this.buti3 = true;
       this.buti4 = false;
