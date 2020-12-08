@@ -18,30 +18,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.post("/bscr", function (req, res) {
-  var songi = req.body.name;
-  console.log(songi);
-  var query = "MATCH (n:Song) where n.name =~ '(?i).*" + songi + ".*' return n";
-  console.log(query);
-  var array = [];
-  const resultPromise = session.run(query).subscribe({
-    onNext: function (record) {
-      array.push(record.get(0).properties);
-
-    },
-    onCompleted: function () {
-      console.log(array);
-
-      res.send(array);
-
-      session.close();
-    },
-    onError: function (error) {
-      console.log(error);
-    }
-  });
-}),
-
 app.post("/reco", function (req, res) {
     var subgender = req.body.subgender;
     console.log(subgender);

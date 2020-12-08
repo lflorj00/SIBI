@@ -4,7 +4,10 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack -p",
+    "start": "webpack-dev-server -p",
+    "dev": "webpack-dev-server"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +17,8 @@
     "cors": "^2.8.5",
     "cors-anywhere": "^0.4.3",
     "express": "^4.17.1",
-    "neo4j-driver": "^4.2.1"
+    "neo4j-driver": "^4.2.1",
+    "npm-install-webpack-plugin": "^4.0.5",
+    "webpack-config": "^7.5.0"
   }
 }
