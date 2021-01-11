@@ -26,7 +26,7 @@
         </v-app-bar>
 
         <v-img
-          max-height="250"
+          max-height="320"
           max-width="max-width"
           src="https://betronicmusic.com/wp-content/uploads/2018/08/ultra-music-festival-video-youredm.jpg"
         ></v-img>
@@ -96,6 +96,7 @@
               <v-btn @click="reco" color="orange" outlined dark rounded
                 >Recomendar</v-btn
               >
+               <v-btn @click="limpiar" color="orange" outlined dark rounded>Limpiar</v-btn>
             </v-flex>
           </v-layout>
         </v-container>
@@ -121,6 +122,8 @@
                     Número de pista: {{ item.trackNumber }}
                     <br />
                     Grupo: {{ item.group }}
+                    <br />
+                    Subgenero: {{ item.subgender }}
                   </v-card-subtitle>
                 </v-card>
               </v-flex>
@@ -158,7 +161,7 @@
                 <v-card elevation="18" shaped dark min-width="200">
                   <v-card-title>{{ item.name }}</v-card-title>
                   <v-card-subtitle>
-                    Mood: {{ item.subgender }}
+                    Subgenero: {{ item.subgender }}
                     <br />
                     Grupo: {{ item.group }}
                     <br />
@@ -265,6 +268,16 @@ export default {
     return: {},
   }),
   methods: {
+
+      limpiar() {
+      this.array = [];
+      this.yarra = [];
+      this.buti2 = false;
+      this.buti3 = false;
+      this.buti4 = false;
+      this.buti5 = false;
+      this.buti6 = false;
+    },
 
     reco() {
       this.buti2 = false;
