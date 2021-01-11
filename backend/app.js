@@ -1,13 +1,13 @@
 const express = require("express");
-const app = express();
 const bodyParser = require("body-parser");
-const port = 8080;
 var cors = require("cors");
+const app = express();
+const port = 8000;
 const neo4j = require("neo4j-driver");
-const driver = neo4j.driver("bolt://localhost:11005", neo4j.auth.basic("neo4j", "1234"));
+const driver = neo4j.driver("bolt://localhost:11003", neo4j.auth.basic("neo4j", "1234"));
 const session = driver.session();
+app.use(bodyParser.json());
 app.use(cors());
-app.use(bodyParser.json);
 app.use(bodyParser.urlencoded( {extended: true} ));
 
 app.use((req, res, next) => {
@@ -35,7 +35,6 @@ app.post("/reco", function (req, res) {
   
         res.send([array[randon_int]]);
   
-        session.close();
       },
       onError: function (error) {
         console.log(error);
@@ -58,7 +57,6 @@ app.post("/reco", function (req, res) {
 
         res.send([array[randon_int]]);
 
-        session.close();
       },
       onError: function (error) {
         console.log(error);
@@ -78,7 +76,6 @@ app.post("/reco", function (req, res) {
 
         res.send(array);
 
-        session.close();
       },
       onError: function (error) {
         console.log(error);
@@ -98,7 +95,6 @@ app.post("/reco", function (req, res) {
 
         res.send(array);
 
-        session.close();
       },
       onError: function (error) {
         console.log(error);
@@ -118,7 +114,6 @@ app.post("/reco", function (req, res) {
 
         res.send(array);
 
-        session.close();
       },
       onError: function (error) {
         console.log(error);
