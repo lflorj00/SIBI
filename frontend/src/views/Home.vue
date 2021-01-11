@@ -105,6 +105,7 @@
             <v-text-field
               label="Canción"
               single-line
+              disabled
             ></v-text-field>
             <v-layout row wrap fill-height fill-width justify-center>
               <v-flex v-for="(item, index) in array" v-bind:key="index">
@@ -177,12 +178,13 @@
 
         <v-main v-if="this.buti3">
           <v-container grid-list-md text-xs-center fluid pa-12>
-            <v-layout row wrap fill-height fill-width justify-center>
               <v-text-field
                 label="Artistas"
                 v-model="search"
                 single-line
+                disabled
               ></v-text-field>
+                <v-layout row wrap fill-height fill-width justify-center>
               <v-flex v-for="(item, index) in array" v-bind:key="index">
                 <v-card elevation="18" shaped dark>
                   <v-card-title>{{ item.name }}</v-card-title>
@@ -201,12 +203,13 @@
 
         <v-main v-if="this.buti4">
           <v-container grid-list-md text-xs-center fluid pa-12>
-            <v-layout row wrap fill-height fill-width justify-center>
               <v-text-field
                 label="Álbumes"
                 v-model="search"
                 single-line
+                disabled
               ></v-text-field>
+               <v-layout row wrap fill-height fill-width justify-center>
               <v-flex v-for="(item, index) in array" v-bind:key="index">
                 <v-card elevation="18" shaped dark>
                   <v-card-title>{{ item.name }}</v-card-title>
@@ -234,7 +237,7 @@ export default {
     i: false,
     array: [],
     yarra: [],
-    row: "House",
+    row: { type: Object, default: () => ({}) },
     buti2: false,
     buti3: false,
     buti4: false,
@@ -249,9 +252,9 @@ export default {
       "Electro House",
       "Dance",
       "Deep House",
-      "Trance Progresivo",
+      "Trance progresivo",
       "Dubpstep",
-      "House Progresivo",
+      "House progresivo",
     ],
     watch: {
       group() {
@@ -273,7 +276,7 @@ export default {
 
       this.$vuetify.goTo(window.innerHeight);
       var data = { subgender: subgender };
-      this.$http.post("http://localhost:8080/reco", data).then((response) => {
+      this.$http.post("http://localhost:8000/reco", data).then((response) => {
         this.yarra.push(response.body[0]);
         //alert(response.body);
       });
@@ -285,7 +288,7 @@ export default {
       this.buti4 = false;
       this.buti5 = false;
       this.buti6 = true;
-      this.$http.get("http://localhost:8080/real").then((response) => {
+      this.$http.get("http://localhost:8000/real").then((response) => {
         this.array = response.body;
         //alert(response.body);
       });
@@ -296,7 +299,7 @@ export default {
       this.buti4 = false;
       this.buti5 = false;
       this.buti6 = false;
-      this.$http.get("http://localhost:8080/can").then((response) => {
+      this.$http.get("http://localhost:8000/can").then((response) => {
         this.array = response.body;
         //alert(response.body);
       });
@@ -307,7 +310,7 @@ export default {
       this.buti4 = true;
       this.buti5 = false;
       this.buti6 = false;
-      this.$http.get("http://localhost:8080/alb").then((response) => {
+      this.$http.get("http://localhost:8000/alb").then((response) => {
         this.array = response.body;
         //alert(response.body);
       });
@@ -318,7 +321,7 @@ export default {
       this.buti4 = false;
       this.buti5 = false;
       this.buti6 = false;
-      this.$http.get("http://localhost:8080/art").then((response) => {
+      this.$http.get("http://localhost:8000/art").then((response) => {
         this.array = response.body;
         //alert(response.body);
       });
