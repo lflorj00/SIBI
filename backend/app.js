@@ -18,6 +18,8 @@ app.use((req, res, next) => {
   next();
 });
 
+//funcion que recomienda una cacnion dependiando del subgenero escogido
+
 app.post("/reco", function (req, res) {
     var subgender = req.body.subgender;
     console.log(subgender);
@@ -42,9 +44,10 @@ app.post("/reco", function (req, res) {
     });
   }),
 
+  //Funcion que muestra una cancion aleatoria
+   
   app.get("/real", function (req, res) {
     var query = "MATCH (n:Song) return n";
-    console.log("prueba");
     var array = [];
 
     const resultPromise = session.run(query).subscribe({
@@ -63,6 +66,8 @@ app.post("/reco", function (req, res) {
       },
     });
   }),
+
+  //Funcion que muestra todas las canciones
 
   app.get("/can", function (req, res) {
     var query = "MATCH (n:Song) return n";
@@ -83,6 +88,8 @@ app.post("/reco", function (req, res) {
     });
   }),
 
+  //Funcion que muestra todos los albumes
+
   app.get("/alb", function (req, res) {
     var query = "MATCH (n:Album) return n";
     var array = [];
@@ -101,6 +108,8 @@ app.post("/reco", function (req, res) {
       },
     });
   }),
+
+  //Funcion que muestra todos los artitas
 
   app.get("/art", function (req, res) {
     var query = "match (n) where (:Gender)-[]->(n) return n";
