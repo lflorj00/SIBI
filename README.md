@@ -17,4 +17,6 @@ Pasos para arrancar la aplicación:
 
 6. Dirigete a la carpeta backend y desde un terminal ejecuta el comando "node app.js".
 
-7. Dirigete a la carpeta frontend y desde un terminal ejecuta el comando "npm run electron:serve".
+7. Dirigete a la carpeta frontend y desde un terminal ejecuta el comando "npm run serve".
+
+8. Desde el navegador dirigete a http://localhost:8080/ 
