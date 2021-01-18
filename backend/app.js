@@ -4,7 +4,7 @@ var cors = require("cors");
 const app = express();
 const port = 8000;
 const neo4j = require("neo4j-driver");
-const driver = neo4j.driver("bolt://localhost:11006", neo4j.auth.basic("neo4j", "1234"));
+const driver = neo4j.driver("bolt://localhost:11003", neo4j.auth.basic("neo4j", "1234"));
 const session = driver.session();
 app.use(bodyParser.json());
 app.use(cors());
